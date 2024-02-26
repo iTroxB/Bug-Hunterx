@@ -1,5 +1,6 @@
 #!/bin/bash
 # Author: iTrox
+# https://patorjk.com/software/taag/#p=display&f=Big&t=BugHunter%20Scan
 
 ######################################################
 #################### COLOURS EDIT ####################
