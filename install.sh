@@ -40,7 +40,7 @@ print_banner() {
     echo -e "                                                                                           ${turquoise}by iTrox${end}\n"
 }
 
-# Update system and db
+# Update system and install tools
 system_prep(){
 	if [[ $(echo $OSTYPE) == "linux-gnu" ]]; then
 		if [ -e /etc/arch-release ]; then
