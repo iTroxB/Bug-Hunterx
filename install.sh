@@ -28,9 +28,15 @@ trap ctrl_c INT
 # Banner
 print_banner() {
     echo;
-    echo -e "  ${yellow} ______  _     _  ______       _     _ _     _ __   _ _______ _______  ______        ______  _____  _______ __   _ ${end}"
-    echo -e "  ${yellow} |_____] |     | |  ____   __  |_____| |     | | \  |    |    |______ |_____/       |______ |       |_____| | \  | ${end}"
-    echo -e "  ${yellow} |_____] |_____| |_____|       |     | |_____| |  \_|    |    |______ |    \_       ______| |_____  |     | |  \_| ${end}\n"
+    echo -e "  ${yellow}  ____              _    _             _               _____ ${end}"
+	echo -e "  ${yellow} |  _ \\            | |  | |           | |             / ____| ${end}"
+	echo -e "  ${yellow} | |_) |_   _  __ _| |__| |_   _ _ __ | |_ ___ _ __  | (___   ___ __ _ _ __ ${end}"
+	echo -e "  ${yellow} |  _ <| | | |/ _\` |  __  | | | | '_ \\| __/ _ \\ '__|  \___ \\ / __/ _\` | '_ \ ${end}"
+	echo -e "  ${yellow} | |_) | |_| | (_| | |  | | |_| | | | | ||  __/ |     ____) | (_| (_| | | | | ${end}"
+	echo -e "  ${yellow} |____/ \\__,_|\\__, |_|  |_|\\__,_|_| |_|\\__\\___|_|    |_____/ \\___\\__,_|_| |_| ${end}"
+	echo -e "  ${yellow}               __/ | ${end}"
+	echo -e "  ${yellow}              |___/ ${end}\n\n"
+	echo -e "  ${turquoise}Footprinting and fingerprinting tool for Bug Bounty Hunty${end}\n"
     echo -e "                                                                                           ${turquoise}by iTrox${end}\n"
 }
 
