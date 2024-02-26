@@ -36,7 +36,7 @@ print_banner() {
 	echo -e "  ${yellow} |____/ \\__,_|\\__, |_|  |_|\\__,_|_| |_|\\__\\___|_|    |_____/ \\___\\__,_|_| |_| ${end}"
 	echo -e "  ${yellow}               __/ | ${end}"
 	echo -e "  ${yellow}              |___/ ${end}\n\n"
-	echo -e "  ${turquoise}Footprinting and fingerprinting tool for Bug Bounty Hunty${end}\n"
+	echo -e "  ${turquoise}Footprinting and fingerprinting tool for Bug Bounty${end}\n"
     echo -e "                                                                                           ${turquoise}by iTrox${end}\n"
 }
 
