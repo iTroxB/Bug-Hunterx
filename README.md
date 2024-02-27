@@ -6,7 +6,7 @@
 ![bugHunter](./img/bughunter1.png)
 
 
-Tool that allows you to install a specific application environment to perform Bug Bounty, as well as to perform footprinting and fingerprinting against a specific domain.
+Tool that allows to install a specific application environment to perform Bug Bounty, in Debian and ArchLinux distributions (under development), as well as to perform footprinting and fingerprinting against a specific domain.
 
 * To use the tool at the system level from a relative path, it is recommended to create a symbolic link to the /usr/bin directory.
 
