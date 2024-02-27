@@ -1,12 +1,12 @@
-# **Bug-Hunter**
+# **BugHunter Scan**
 
 **In development**
 
 
-![bugHunter](./img/bugh.png)
+![bugHunter](./img/bughunter1.png)
 
 
-Automated tool under scripting in Bash, which allows the collection of information in Bug Bounty programs.
+Tool that allows you to install a specific application environment to perform Bug Bounty, as well as to perform footprinting and fingerprinting against a specific domain.
 
 * To use the tool at the system level from a relative path, it is recommended to create a symbolic link to the /usr/bin directory.
 
@@ -15,4 +15,26 @@ Automated tool under scripting in Bash, which allows the collection of informati
 
 ## Use
 
-- bugHunter <domain> <domain or subdomain without http(s)://>
+![bugHunter](./img/bughunter2.png)
+
+![bugHunter](./img/bughunter3.png)
+
+| **Tools used** | **Status** |
+|----------------|-----------|
+| whois | **✔** |
+| zaproxy | **✔** |      
+| mapcidr | **✔** |
+| dnsx | **✔** |
+| massdns | **✔** |
+| cero | **✔** |
+| katana | **✔** |
+| httpx | **✔** |
+| unfurl | **✔** |
+| gau | **✔** |
+| ctfr | **✔** |
+| gowitness | **✔** |
+| analyticsrelationships | **✔** |
+| gobuster | **✔** |
+| nuclei | **✔** |
+| nuclei-templates | **✔** |
+|SecLists | **✔** |
