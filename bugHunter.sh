@@ -1,10 +1,13 @@
 #!/bin/bash
 # Author: iTrox
 
-########################
-##### COLOURS EDIT #####
-########################
+# https://patorjk.com/software/taag/#p=display&f=Grande&t=BugHunter%20Scan
 
+
+
+######################################################
+#################### COLOURS EDIT ####################
+######################################################
 green="\e[0;32m\033[1m"
 end="\033[0m\e[0m"
 red="\e[0;31m\033[1m"
@@ -14,13 +17,15 @@ purple="\e[0;35m\033[1m"
 turquoise="\e[0;36m\033[1m"
 gray="\e[0;37m\033[1m"
 
-#####################
-##### FUNCTIONS #####
-#####################
+
+
+###################################################
+#################### FUNCTIONS ####################
+###################################################
 
 # Bye Ctrl+C
 function ctrl_c(){
-    echo -e "\n\n ${redColour}[!] Exit...${endColour}\n"
+    echo -e "\n\n ${red}[!] Exit...${end}\n"
     tput cnorm && exit 1
 }
 trap ctrl_c INT
@@ -28,47 +33,296 @@ trap ctrl_c INT
 # Banner
 print_banner() {
     echo;
-    echo -e "  ${yellow} ______  _     _  ______      _     _ _     _ __   _ _______ _______  ______        ______  _____  _______ __   _ ${end}"
-    echo -e "  ${yellow} |_____] |     | |  ____  __  |_____| |     | | \  |    |    |______ |_____/       |______ |       |_____| | \  | ${end}"
-    echo -e "  ${yellow} |_____] |_____| |_____|      |     | |_____| |  \_|    |    |______ |    \_       ______| |_____  |     | |  \_| ${end}\n"
-    echo -e "                                                                                           ${turquoise}by iTrox${end}\n"
+    echo -e " ${yellow}  ____              _    _             _               _____ ${end}"
+	echo -e " ${yellow} |  _ \\            | |  | |           | |             / ____| ${end}"
+	echo -e " ${yellow} | |_) |_   _  __ _| |__| |_   _ _ __ | |_ ___ _ __  | (___   ___ __ _ _ __ ${end}"
+	echo -e " ${yellow} |  _ <| | | |/ _\` |  __  | | | | '_ \\| __/ _ \\ '__|  \___ \\ / __/ _\` | '_ \ ${end}"
+	echo -e " ${yellow} | |_) | |_| | (_| | |  | | |_| | | | | ||  __/ |     ____) | (_| (_| | | | | ${end}"
+	echo -e " ${yellow} |____/ \\__,_|\\__, |_|  |_|\\__,_|_| |_|\\__\\___|_|    |_____/ \\___\\__,_|_| |_| ${end}"
+	echo -e " ${yellow}               __/ | ${end}"
+	echo -e " ${yellow}              |___/ ${end}\n\n"
+	echo -e "  ${turquoise}Footprinting and fingerprinting tool for Bug Bounty${end}"
+	echo -e "  ${turquoise}Version 1.0${end}"
+    echo -e "  ${turquoise}Made by Javier González (iTrox)${end}\n"
+	echo -e "  ${turquoise}bugHunter [-h] or [--help] to view help menu${end}\n"
 }
 
-# Update system and db
-update(){
-
-	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+# Update system and install tools
+upHunter(){
+	if [[ $(echo $OSTYPE) == "linux-gnu" ]]; then
 		if [ -e /etc/arch-release ]; then
-			echo -e "\n ${turquoise}[➤]${end} ${gray}Updating${end} ${blue}$(lsb_release -si) $(uname)${end} ${gray}repositories...${end}"
-			pacman -Sy &>/dev/null
-			sleep 2
-			if [ "$(which git)" == "/usr/bin/git" ]; then
-				echo -e "\n ${turquoise}[➤]${end} ${blue}git${end} ${gray}installed...${end}"
-				sleep 2
-			else
-				echo -e "\n ${red}[✘]${end} ${blue}git${end} ${gray}is not installed on your system...${end}"
-				sleep 1
-				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}git${end} ${gray}...${end}"
-				pacman -S git --noconfirm
-				sleep 1
-				echo -e "\n ${green}[✔]${end} ${blue}git${end} ${gray}has successfully installed on your system...${end}"
-				sleep 2
-			fi
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Under development for Arch Linux environment...${end}"
 		elif [ -e /etc/debian_version ]; then
-			echo -e "\n ${turquoise}[➤]${end} ${gray}Updating${end} ${blue}$(lsb_release -si) $(uname)${end} ${gray}repositories...${end}"
-			apt update &>/dev/null
-			sleep 2
-			if [ "$(which git)" == "/usr/bin/git" ]; then
-				echo -e "\n ${turquoise}[➤]${end} ${blue}git${end} ${gray}installed...${end}"
-				sleep 2
+			
+			# System update and upgrade
+			cd /root
+			dist_name=$(cat /etc/os-release | head -n 2 | tail -n 1 | awk '{print $1}' | cut -d '=' -f 2 | cut -c 2-)
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Updating${end} ${blue}"$dist_name" $(uname)${end} ${gray}repositories...${end} \n"
+			apt update
+			echo -e "\n ${green}[✔]${end} ${gray}Updating${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
+			sleep 1
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Upgrading${end} ${blue}"$dist_name" $(uname)${end} ${gray}system...${end} \n"
+			apt upgrade -y
+			echo -e "\n ${green}[✔]${end} ${gray}Upgrading${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
+			sleep 1
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Dist-upgrading${end} ${blue}"$dist_name" $(uname)${end}${gray}...${end} \n"
+			apt dist-upgrade -y
+			echo -e "\n ${green}[✔]${end} ${gray}Dist-upgrade${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
+			sleep 1
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Updating system database for file search...${end}"
+			updatedb &>/dev/null
+			echo -e "\n ${green}[✔]${end} ${gray}Updatedb${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
+			sleep 1
+
+			# Install BugBounty tools
+			
+			# go
+			if [ "$(which go)" == "/usr/bin/go" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}go${end} ${gray}installed...${end}"
+				sleep 1
 			else
-				echo -e "\n ${red}[✘]${end} ${blue}git${end} ${gray}is not installed on your system...${end}"
+				echo -e "\n ${red}[✘]${end} ${blue}go${end} ${gray}is not installed on your system...${end}"
 				sleep 1
-				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}git${end} ${gray}...${end}"${green}[✔]${end}
-				apt install git -y
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}go${end}${gray}...${end}"
+				apt install golang-go -y
+				echo -e "\n ${green}[✔]${end} ${blue}go${end} ${gray}has successfully installed on your system...${end} \n"
 				sleep 1
-				echo -e "\n ${green}[✔]${end} ${blue}git${end} ${gray}has successfully installed on your system...${end}"
-				sleep 2
+			fi
+			# whois
+			if [ "$(which whois)" == "/usr/bin/whois" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}whois${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}whois${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}whois${end}${gray}...${end}"
+				apt install whois -y
+				echo -e "\n ${green}[✔]${end} ${blue}whois${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# zaproxy
+			if [ "$(which zaproxy)" == "/usr/bin/zaproxy" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}zaproxy${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}zaproxy${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}zaproxy${end}${gray}...${end}"
+				apt install zaproxy -y
+				echo -e "\n ${green}[✔]${end} ${blue}zaproxy${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# mapcidr
+			if [ "$(which mapcidr)" == "/usr/bin/mapcidr" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}mapcidr${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}mapcidr${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}mapcidr${end}${gray}...${end}"
+				rm -rf /usr/bin/mapcidr
+				go install github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
+				ln -s $HOME/go/bin/mapcidr /usr/bin/mapcidr
+				echo -e "\n ${green}[✔]${end} ${blue}mapcidr${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# dnsx
+			if [ "$(which dnsx)" == "/usr/bin/dnsx" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}dnsx${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}dnsx${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}dnsx${end}${gray}...${end}"
+				apt install dnsx -y
+				echo -e "\n ${green}[✔]${end} ${blue}dnsx${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# massdns
+			if [ "$(which massdns)" == "/usr/bin/massdns" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}massdns${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}massdns${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}massdns${end}${gray}...${end}"
+				apt install massdns -y
+				echo -e "\n ${green}[✔]${end} ${blue}massdns${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# cero
+			if [ "$(which cero)" == "/usr/bin/cero" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}cero${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}cero${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}cero${end}${gray}...${end}"
+				rm -rf /usr/bin/cero
+				go install github.com/glebarez/cero@latest
+				ln -s $HOME/go/bin/cero /usr/bin/cero
+				echo -e "\n ${green}[✔]${end} ${blue}cero${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# katana
+			if [ "$(which katana)" == "/usr/bin/katana" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}katana${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}katana${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}katana${end}${gray}...${end}"
+				rm -rf /usr/bin/katana
+				go install github.com/projectdiscovery/katana/cmd/katana@latest
+				ln -s $HOME/go/bin/katana /usr/bin/katana
+				echo -e "\n ${green}[✔]${end} ${blue}katana${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# httpx
+			if [ "$(which httpx)" == "/usr/bin/httpx" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}installed...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Reinstalling${end} ${blue}httpx${end}${gray}...${end}"
+				rm -rf /usr/bin/httpx
+				rm -rf $HOME/go/bin/httpx
+				go install github.com/projectdiscovery/httpx/cmd/httpx@latest
+				ln -s $HOME/go/bin/httpx /usr/bin/httpx
+				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}httpx${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}httpx${end}${gray}...${end}"
+				rm -rf /usr/bin/httpx
+				rm -rf $HOME/go/bin/httpx
+				go install github.com/projectdiscovery/httpx/cmd/httpx@latest
+				ln -s $HOME/go/bin/httpx /usr/bin/httpx
+				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# unfurl
+			if [ "$(which unfurl)" == "/usr/bin/unfurl" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}unfurl${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}unfurl${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}unfurl${end}${gray}...${end}"
+				rm -rf /usr/bin/unfurl
+				go install github.com/tomnomnom/unfurl@latest
+				ln -s $HOME/go/bin/unfurl /usr/bin/unfurl
+				echo -e "\n ${green}[✔]${end} ${blue}unfurl${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# gau
+			if [ "$(which gau)" == "/usr/bin/gau" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}gau${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}gau${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}gau${end}${gray}...${end}"
+				rm -rf /usr/bin/gau
+				go install github.com/lc/gau/v2/cmd/gau@latest
+				ln -s $HOME/go/bin/gau /usr/bin/gau
+				echo -e "\n ${green}[✔]${end} ${blue}gau${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# ctfr
+			if [ "$(which ctfr)" == "/usr/bin/ctfr" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}ctfr${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}ctfr${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}ctfr${end}${gray}...${end}"
+				git clone https://github.com/UnaPibaGeek/ctfr.git /tmp/ctfr
+				pip3 install -r /tmp/ctfr/requirements.txt
+				mv /tmp/ctfr/ctfr.py /usr/bin/ctfr
+				chmod +x /usr/bin/ctfr
+				rm -fr /tmp/ctfr
+				echo -e "\n ${green}[✔]${end} ${blue}ctfr${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# gowitness
+			if [ "$(which gowitness)" == "/usr/bin/gowitness" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}gowitness${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}gowitness${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}gowitness${end}${gray}...${end}"
+				rm -rf /usr/bin/gowitness
+				go install github.com/sensepost/gowitness@latest
+				ln -s $HOME/go/bin/gowitness /usr/bin/gowitness
+				echo -e "\n ${green}[✔]${end} ${blue}gowitness${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# gobuster
+			if [ "$(which gobuster)" == "/usr/bin/gobuster" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}gobuster${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}gobuster${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}gobuster${end}${gray}...${end}"
+				apt install gobuster -y
+				echo -e "\n ${green}[✔]${end} ${blue}gobuster${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# analyticsrelationshipsgobusternucleinuclei-templatesSecLists
+			if [ "$(which analyticsrelationships)" == "/usr/bin/analyticsrelationships" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}analyticsrelationships${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}analyticsrelationships${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}analyticsrelationships${end}${gray}...${end}"
+				git clone https://github.com/Josue87/AnalyticsRelationships.git /tmp/analytics
+				pip3 install -r /tmp/analytics/Python/requirements.txt
+				mv /tmp/analytics/Python/analyticsrelationships.py /usr/bin/analyticsrelationships
+				chmod +x /usr/bin/analyticsrelationships
+				sed -i '1s/^/#!\/usr\/bin\/env python\n/' /usr/bin/analyticsrelationships
+				rm -fr /tmp/analytics
+				echo -e "\n ${green}[✔]${end} ${blue}analyticsrelationships${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# nuclei
+			if [ "$(which nuclei)" == "/usr/bin/nuclei" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}nuclei${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}nuclei${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}nuclei${end}${gray}...${end}"
+				apt install nuclei
+				echo -e "\n ${green}[✔]${end} ${blue}nuclei${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# nuclei-templates
+			find_nucleitemp=$(find / -type d -iname "nuclei-templates" -print -quit 2>/dev/null)
+			if [ -n "$find_nucleitemp" ] && [ "$find_nucleitemp" == "/opt/nuclei-templates" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}nuclei-templates${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}nuclei-templates${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}nuclei-templates${end}${gray}...${end}"
+				git clone https://github.com/projectdiscovery/nuclei-templates.git /opt/nuclei-templates
+				echo -e "\n ${green}[✔]${end} ${blue}nuclei-templates${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			# SecLists
+			find_seclists=$(find /usr/share/wordlists -type d -iname "seclists" -print -quit 2>/dev/null)
+			if [ -n "$find_seclists" ] && [ "$find_seclists" == "/usr/share/wordlists/SecLists" ]; then
+				echo -e "\n ${green}[✔]${end} ${gray}The${end} ${blue}SecLists${end} ${gray}directory exist in the path${end} ${blue}/usr/share/wordlists/${end}"
+			else
+				echo -e "\n ${red}[✘]${end} ${gray}The${end} ${blue}SecLists${end} ${gray}directory doesn't exist...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Downloading${end} ${blue}SecLists${end} ${gray}repository from GitHub...${end}"
+				git clone https://github.com/danielmiessler/SecLists.git /usr/share/wordlists/SecLists
+				echo -e "\n ${green}[✔]${end} ${blue}SecLists${end} ${gray}directory has been created...${end}"
+				sleep 1
 			fi
 		else
 			echo -e "\n ${red}[✘]${end} ${gray}Unsupported Linux distribution${end}"
@@ -76,133 +330,95 @@ update(){
 			tput cnorm
 		fi
 	else
-		echo -e "\n ${red}[!] This script is intended for Linux systems.${end}"
+		echo -e "\n ${red}[!] This script runs only on Linux systems...${end}"
 		exit 1
 		tput cnorm
 	fi
-
-	echo -e "\n ${turquoise}[➤]${end} ${gray}Updating system database for file search...${end}"
-	updatedb &>/dev/null
-	sleep 2
-
-	dir="SecLists"
-	if [ -n "$(find /usr/share -type d -name "$dir" &>/dev/null)" ]; then
-		echo -e "\n ${green}[✔]${end} ${gray}The${end} ${blue}$dir${end} ${gray}directory exist in the path${end} ${blue}/usr/share/$dir{end}"
-	else
-		echo -e "\n ${red}[✘]${end} ${gray}The${end} ${blue}$dir${end} ${gray}directory doesn't exist...${end}"
-		sleep f1
-		echo -e "\n ${turquoise}[➤]${end} ${gray}Downloading${end} ${blue}SecLists${end} ${gray}repository from GitHub...${end}"
-		git clone https://github.com/danielmiessler/SecLists.git
-		sleep 1
-		echo -e "\n ${green}[✔]${end} ${gray}The${end} ${blue}bug_bounty${end} ${gray}directory has been created in the path${end} ${blue}$HOME/bug_bounty${end}"
-		sleep 2
-	fi
-	
 }
 
-# Mkdir bug-bounty
-bug_bounty(){
 
-        directory="$HOME/bug_bounty"
-
-	if [ -d "$directory" ]; then
-		echo -e "\n ${green}[✔]${end} ${gray}The${end} ${blue}bug_bounty${end} ${gray}directory exist in the path${end} ${blue}$HOME/bug_bounty${end}"
-		sleep 2
-	else
-		echo -e "\n ${red}[✘]${end} ${gray}The${end} ${blue}bug_bounty${end} ${gray}directory doesn't exist...${end}"
-		sleep 1
-		mkdir "$HOME/bug_bounty"
-		echo -e "\n ${green}[✔]${end} ${gray}The${end} ${blue}bug_bounty${end} ${gray}directory has been created in the path${end} ${blue}$HOME/bug_bounty${end}"
-		sleep 2
-	fi
-
+# Run BugHunter Scan
+runHunter(){
+	echo "runHunter under development"
 }
 
-# process
-process(){
-
-	if [ -d "$directory/$1" ]; then
-		echo -e "\n ${green}[✔]${end} ${gray}The $1 directory exist...${end}"
-		sleep 2a
-	else
-		echo -e "\n ${red}[✘]${end} ${gray}The $1 directory doesn't exist...${end}"
-		sleep 1
-		mkdir "$directory/$1"
-		echo -e "\n ${green}[✔]${end} ${gray}The $1 directory has been created in the path${end} ${blue}$directory/$1${end}"
-		sleep 2
-	fi
-
-	logsDir=$directory/$1/$(date +"%Y_%m_%d-%H_%M")
-	mkdir "$logsDir"
-	echo -e "\n ${green}[✔]${end} ${gray}A directory has been created with the current date and time in the path${end} ${blue}$directory/$1/${end}"
-	sleep 1
-	
-	# Shuffledns
-	echo -e "\n ${turquoise}[➤]${end} ${gray}Running${end} ${blue}shuffledns${end}${gray}...${end}"	
-	shuffledns -d $1 -w /usr/bin/SecLists/Discovery/DNS/subdomains-top1million-110000.txt -r /home/itrox/recopilacion/lists/resolvers.txt > $logsbase/shuffledns_out.txt
-	cat $logsbase/shuffledns_out.txt | unfurl --unique domains > $logsbase/shuffledns_ok.txt
-	mv $logsbase/shuffledns_ok.txt $logsbase/shuffledns.txt												# ?????????????
-	rm $logbase/shuffledns_out.txt
-	sleep 1
-
-	# FINDOMAIN
-	findomain -t $1 > $logsbase/findomain_out.txt
-	cat $logsbase/findomain_out.txt | unfurl --unique domains > $logsbase/findomain_ok.txt
-	mv $logsbase/findomain_ok.txt $logsbase/findomain.txt												# ?????????????
-	rm $logbase/findomain_out.txt
-	sleep 1
-
-	# CERO
-	cero -d $1 > $logsbase/cero.txt
-
-	# KATANA
-	echo $1 | katana -silent -jc -o $logsbase/katana_out.txt -kf robotstxt,sitemapxml,securitytxt
-	cat $logsbase/katana_out.txt | unfurl --unique domains > $logsbase/katana_ok.txt
-	mv $logsbase/katana_ok.txt $logsbase/katana.txt
-	rm $logbase/katana_out.txt
-	sleep 1
-
-	# CTFR
-	ctfr -d $1 > $logsbase/ctfr_out.txt
-	cat $logsbase/ctfr_out.txt | unfurl --unique domains | sed 's/^\*\.\(.*\)/\1/g' > $logsbase/ctfr_ok.txt
-	mv $logsbase/ctfr_ok.txt $logsbase/ctfr.txt
-	rm $logbase/ctfr_out.txt
-
-	# GAU
-	gau --threads 50 $1 --o $logsbase/gau_out.txt
-	cat $logsbase/gau_out.txt | unfurl --unique domains > $logsbase/gau_ok.txt
-	mv $logsbase/gau_ok.txt $logsbase/gau.txt
-	rm $logbase/gau_out.txt
-	sleep 1
-
-	# ONE FILE
-	cat $logsbase/shuffledns.txt $logsbase/findomain.txt  $logsbase/cero.txt $logsbase/katana.txt $logsbase/ctfr.txt $logsbase/gau.txt > $logsbase/subdominios.txt
+# Help menu
+# Help menu
+help_menu() {
+    echo -e " ${yellow}Usage:${end}"
+	echo -e " ${yellow}Menu options:${end}\n"
+    echo -e " 	${turquoise}1${end}, ${purple}upHunter${end}	${gray}Updates the system and installs the required tools for BugBounty environment${end}"
+	echo -e " 			${gray}Tools installed:${end}"
+	echo -e " 			 ${green}→${end} ${gray}whois${end}"
+	echo -e "			 ${green}→${end} ${gray}zaproxy${end}"
+	echo -e "			 ${green}→${end} ${gray}mapcidr${end}"
+	echo -e "			 ${green}→${end} ${gray}dnsx${end}"
+	echo -e "			 ${green}→${end} ${gray}massdns${end}"
+	echo -e "			 ${green}→${end} ${gray}cero${end}"
+	echo -e "			 ${green}→${end} ${gray}katana${end}"
+	echo -e "			 ${green}→${end} ${gray}httpx${end}"
+	echo -e "			 ${green}→${end} ${gray}unfurl${end}"
+	echo -e "			 ${green}→${end} ${gray}gau${end}"
+	echo -e "			 ${green}→${end} ${gray}ctfr${end}"
+	echo -e "			 ${green}→${end} ${gray}gowitness${end}"
+	echo -e "			 ${green}→${end} ${gray}analyticsrelationships${end}"
+	echo -e "			 ${green}→${end} ${gray}gobuster${end}"
+	echo -e "			 ${green}→${end} ${gray}nuclei${end}"
+	echo -e "			 ${green}→${end} ${gray}nuclei-templates${end}"
+	echo -e "			 ${green}→${end} ${gray}SecLists${end} \n"
+    echo -e " 	${turquoise}2${end}, ${purple}runHunter${end}	${gray}Start with the footprinting and fingerprinting process${end}\n"
 }
+
+# Menu options function
+menu_function(){
+	while true; do
+		echo -e "\n ${turquoise}[➤]${end} ${gray}Select option want to execute (enter the option number):${end} \n"
+		echo -e " 	${turquoise}1)${end} ${purple}upHunter${end}"
+		echo -e " 	${turquoise}2)${end} ${purple}runHunter${end}"
+		echo -e " 	${turquoise}3)${end} ${purple}Exit${end} \n"
+
+		read -p " -> Insert option number: " number; echo
+
+		case $number in
+			1) # upHunter
+				upHunter
+				;;
+			2) # runHunter
+				runHunter
+				;;
+			3) # exit
+				echo -e " ${red}[!] Bye Hunter...${end} \n"
+				exit 0
+				;;
+			*)
+				echo -e "${red}[!] Error: Invalid format.\n[*] Try again.${end} \n"
+				# exit 1
+				;;
+		esac
+	done
+}
+
+# REDIRECT: HELP MENU
+if [[ "$1" = "-h" || "$1" = "--help" ]]; then
+	print_banner
+	help_menu
+    exit 0
+fi
 
 # Main function
 main_function(){
-        if [ "$(id  -u)" == "0" ]; then
-                bug_bounty
-        	process "$1"
-        else
-	        echo -e "\n ${red}[!] Please, connect as root user${end}\n"
-        fi
+	if [ "$(id -u)" == "0" ]; then
+		menu_function
+	else
+		echo -e "\n ${red}[!] Please, connect as root user${end}\n"
+		tput cnorm
+	fi
 }
 
-######################
-##### RUN SCRIPT #####
-######################
 
-tput civis
-#print_banner
 
-if [ $1 ]; then
-	main_function "$1"
-	tput cnorm
-else
-	echo -e " ${red}[!] Error: Invalid format. Try again.${end}"
-	echo -e "\n ${yellow}[*]${end} ${gray}Use: bugHunter <domain or subdomain without http(s)://>${end}"
-	echo -e " ${yellow}[*]${end} ${gray}Example:${end} ${blue}bugHunter domain.com${end} ${gray}or${end} ${blue}bugHunter sub.domain.com${end}\n"
-	tput cnorm
-	exit 1
-fi
+####################################################
+#################### RUN SCRIPT ####################
+####################################################
+print_banner
+main_function
