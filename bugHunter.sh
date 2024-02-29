@@ -41,7 +41,7 @@ print_banner() {
 	echo -e " ${yellow}               __/ | ${end}"
 	echo -e " ${yellow}              |___/ ${end}\n\n"
 	echo -e "  ${turquoise}Footprinting tool for Bug Bounty${end}"
-	echo -e "  ${turquoise}Version 1.1${end}"
+	echo -e "  ${turquoise}Version 1.0${end}"
     echo -e "  ${turquoise}Made by iTrox${end}\n"
 	echo -e "  ${turquoise}bugHunter [-h] or [--help] to view help menu${end}\n"
 }
@@ -368,7 +368,6 @@ upHunter(){
 	fi
 }
 
-
 # Run BugHunter Scan
 runHunter(){
 	echo -n -e "\n ${turquoise}[➤]${end} ${gray}Insert target domain:${end}"
@@ -380,7 +379,7 @@ runHunter(){
 	ip_address=$(ping -c 1 $domain | head -n 1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
 	echo -e " ${green}[✔]${end} ${gray}Target domain:${end} ${blue}$domain${end} ${green}→${end} ${gray}IP Address:${end} ${blue}$ip_address${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# nslookup
 	mkdir -p "/root/$domain/nslookup"
@@ -407,7 +406,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish nslookup...${end}\n"
 	
-	sleep 2
+	sleep 2; echo
 
 	# dig
 	mkdir -p "/root/$domain/dig"
@@ -434,7 +433,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish dig...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# whois
 	mkdir -p "/root/$domain/whois"
@@ -456,7 +455,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish whois...${end}\n"
 	
-	sleep 2
+	sleep 2; echo
 
 	# mapcidr
 	# mkdir -p "/root/$domain/mapcidr"
@@ -465,7 +464,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish mapcidr...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# subfinder
 	mkdir -p "/root/$domain/subfinder"
@@ -477,7 +476,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish subfinder...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# dnsx
 	mkdir -p "/root/$domain/dnsx"
@@ -489,7 +488,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish dnsx...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# httpx
 	mkdir -p "/root/$domain/httpx"
@@ -510,7 +509,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish httpx...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# analyticsrelationship
 	mkdir -p "/root/$domain/analyticsRelationships"
@@ -522,7 +521,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish analyticsrelationships...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# cero
 	mkdir -p "/root/$domain/cero"
@@ -534,7 +533,7 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish cero...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# katana
 	mkdir -p "/root/$domain/katana"
@@ -544,15 +543,15 @@ runHunter(){
 	echo -e " ${yellow}→${end} ${gray}katana -u $domain -o "$katanaDir/katana.txt" ${end}"
 	katana -u $domain -o "$katanaDir/katana.txt"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt" ${end}"
+	echo -e "\n ${yellow}→${end} ${gray}katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt" ${end}"
 	katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_domains.txt" ${end}"
-	cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_domains.txt"
+	echo -e "\n ${yellow}→${end} ${gray}cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_subdomains.txt" ${end}"
+	cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_subdomains.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish katana...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# ctfr
 	mkdir -p "/root/$domain/ctfr"
@@ -562,27 +561,28 @@ runHunter(){
 	echo -e " ${yellow}→${end} ${gray}ctfr -org -d $domain -o "$ctfrDir/ctfr.txt" ${end}"
 	ctfr -org -d $domain -o "$ctfrDir/ctfr.txt"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}ctfr -org -d $domain | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt" ${end}"
+	echo -e "\n ${yellow}→${end} ${gray}ctfr -org -d $domain | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt" ${end}"
 	cat "$ctfrDir/ctfr.txt" | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish ctfr...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# gau
 	mkdir -p "/root/$domain/gau"
 	gauDir="/root/$domain/gau"
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Obtaining known URLs by Open Threat Exchange from AlienVault, Wayback Machine and Common Crawl with gau on $domain ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}gau --threads 2 $domain --o "$gauDir/gau.txt" ${end}"
-	gau --threads 2 $domain --o "$gauDir/gau.txt"
+	echo -e " ${yellow}→${end} ${gray}gau --threads 2 $domain --o "$gauDir/gau.txt" 2>/dev/null ${end}\n"
+	gau --threads 2 $domain --o "$gauDir/gau.txt" 2>/dev/null
+
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}ctfr -org -d $domain | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt" ${end}"
+	echo -e " ${yellow}→${end} ${gray}cat "$gauDir/gau.txt" | unfurl --unique domains > "$gauDir/gau_subdomains.txt" ${end}\n"
 	cat "$gauDir/gau.txt" | unfurl --unique domains > "$gauDir/gau_subdomains.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish gau...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# amass
 	mkdir -p "/root/$domain/amass"
@@ -605,28 +605,35 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish amass...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# Getting unique subdomains
-	#mkdir -p "/root/$domain/subdomain"
-	#subDir="/root/$domain/subdomain"
+	mkdir -p "/root/$domain/subdomain"
+	subdomDir="/root/$domain/subdomain"
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Obtaining unique and live subdomains from $domain scanning ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}gau --threads 2 $domain --o "$gauDir/gau.txt" ${end}"
+	cat "$ceroDir/cero.txt" "$ctfrDir/ctfr_subdomains.txt" "$dnsxDir/dnsx_subdomains.txt" "$gauDir/gau_subdomains.txt" "$httpxDir/httpx_HTTP200-subdomains.txt" "$katanaDir/katana_subdomains.txt" "$subDir/subfinder_subdomains.txt" > "$subdomDir/pre_scope.txt"
+	cat "$subdomDir/pre_scope.txt" | unfurl --unique domains > "$subdomDir/scope.txt"
+	httpx -l "$subdomDir/scope.txt" -silent -status-code -mc 200 -probe > "$subdomDir/scope_HTTP200.txt"
+	cat "$subdomDir/scope_HTTP200.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$subdomDir/scope_lives.txt"
+	cat "$subdomDir/scope_lives.txt" | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
+	rm -rf {"$subdomDir/pre_scope.txt","$subdomDir/scope.txt","$subdomDir/scope_HTTP200.txt","$subdomDir/scope_lives.txt"}
 	# ----------------------------------------------------------------------------------------------------
-	echo -e "\n ${green}[✔]${end} ${gray}Finish amass...${end}\n"
+	echo -e "\n ${yellow}→${end} ${gray}Created subdomains_lives.txt file in $subdomDir directory${end}"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${green}[✔]${end} ${gray}Finished obtaining subdomains for the $domain domain scanned...${end}\n"
 
-	sleep 2
+	sleep 2; echo
 
 	# gowitness
-	#mkdir -p "/root/$domain/gowitness"
-	#gowitnessDir="/rosot/$domain/gowitness"
-	#echo -e "\n ${turquoise}[➤]${end} ${gray}Taking multiple screenshots of web pages with gowitness on the main domain scope ${end}\n"
+	mkdir -p "/root/$domain/gowitness"
+	gowitnessDir="/root/$domain/gowitness"
+	echo -e "\n ${turquoise}[➤]${end} ${gray}Taking multiple screenshots of web pages with gowitness on the main domain scope ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
-	#echo -e " ${yellow}→${end} ${gray}gau --threads 2 $domain --o "$gauDir/gau.txt" ${end}"
-	#gowitness file -f "AQUIFALTA" -P "$gowitnessDir/screenshots/"  --chrome-path /usr/bin/firefox-esr
+	echo -e " ${yellow}→${end} ${gray}gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/firefox-esr${end}\n"
+	gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/firefox-esr
 	# ----------------------------------------------------------------------------------------------------
-	#echo -e "\n ${green}[✔]${end} ${gray}Finish gowitness...${end}\n"
+	echo -e "\n ${green}[✔]${end} ${gray}Finish gowitness...${end}\n"
 }
 
 # Help menu
