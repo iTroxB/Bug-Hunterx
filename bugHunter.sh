@@ -88,16 +88,44 @@ upHunter(){
 				sleep 1
 			fi
 
-			# firefox
-			if [ "$(which firefox-esr)" == "/usr/bin/firefox-esr" ]; then
-				echo -e "\n ${green}[✔]${end} ${blue}firefox-esr${end} ${gray}installed...${end}"
+			# google-chrome
+			if [ "$(which google-chrome-stable)" == "/usr/bin/google-chrome-stable" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}google-chrome${end} ${gray}installed...${end}"
 				sleep 1
 			else
-				echo -e "\n ${red}[✘]${end} ${blue}firefox-esr${end} ${gray}is not installed on your system...${end}"
+				echo -e "\n ${red}[✘]${end} ${blue}google-chrome${end} ${gray}is not installed on your system...${end}"
 				sleep 1
-				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}firefox-esr${end}${gray}...${end}"
-				apt install firefox-esr -y
-				echo -e "\n ${green}[✔]${end} ${blue}firefox-esr${end} ${gray}has successfully installed on your system...${end} \n"
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}google-chrome${end}${gray}...${end}"
+				wget -O /root/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+				dpkg -i /root/google-chrome-stable_current_amd64.deb
+				rm -rf /root/google-chrome-stable_current_amd64.deb
+				echo -e "\n ${green}[✔]${end} ${blue}google-chrome${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
+			# nslookup
+			if [ "$(which nslookup)" == "/usr/bin/nslookup" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}nslookup${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}nslookup${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}nslookup${end}${gray}...${end}"
+				apt install dnsutils -y
+				echo -e "\n ${green}[✔]${end} ${blue}nslookup${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
+			# dig
+			if [ "$(which dig)" == "/usr/bin/dig" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}dig${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}dig${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}dig${end}${gray}...${end}"
+				apt install dnsutils -y
+				echo -e "\n ${green}[✔]${end} ${blue}dig${end} ${gray}has successfully installed on your system...${end} \n"
 				sleep 1
 			fi
 
@@ -271,6 +299,19 @@ upHunter(){
 				sleep 1
 			fi
 
+			# eog
+			if [ "$(which eog)" == "/usr/bin/eog" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}eog${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}eog${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}google-chrome${end}${gray}...${end}"
+				apt install eog -y
+				echo -e "\n ${green}[✔]${end} ${blue}eog${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
 			# gowitness
 			if [ "$(which gowitness)" == "/usr/bin/gowitness" ]; then
 				echo -e "\n ${green}[✔]${end} ${blue}gowitness${end} ${gray}installed...${end}"
@@ -354,6 +395,34 @@ upHunter(){
 				echo -e "\n ${turquoise}[➤]${end} ${gray}Downloading${end} ${blue}SecLists${end} ${gray}repository from GitHub...${end}"
 				git clone https://github.com/danielmiessler/SecLists.git /usr/share/wordlists/SecLists
 				echo -e "\n ${green}[✔]${end} ${blue}SecLists${end} ${gray}directory has been created...${end}"
+				sleep 1
+			fi
+
+			# nmap
+			if [ "$(which nmap)" == "/usr/bin/nmap" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}nmap${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}nmap${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}nmap${end}${gray}...${end}"
+				apt install nmap -y
+				echo -e "\n ${green}[✔]${end} ${blue}nmap${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
+			# subfinder
+			if [ "$(which subfinder)" == "/usr/bin/subfinder" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}subfinder${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}subfinder${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}subfinder${end}${gray}...${end}"
+				rm -rf /usr/bin/subfinder
+				go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+				ln -s $HOME/go/bin/subfinder /usr/bin/subfinder
+				echo -e "\n ${green}[✔]${end} ${blue}subfinder${end} ${gray}has successfully installed on your system...${end} \n"
 				sleep 1
 			fi
 		else
@@ -446,9 +515,11 @@ runHunter(){
 	echo -e " ${yellow}→${end} ${gray}whois -h whois.radb.net $ip_address > "$whoisDir/whois_radb.txt" ${end}"
 	whois -h whois.radb.net $ip_address > "$whoisDir/whois_radb.txt"
 	# ----------------------------------------------------------------------------------------------------
-	AS=$(whois -h whois.radb.net $ip_address | grep -w 'origin' | awk '{print $2}')
+	AS=$(whois -h whois.radb.net $ip_address | grep -w 'origin:' | awk '{print $2}' | uniq)
 	echo -e " ${yellow}→${end} ${gray}whois -h whois.radb.net -- '-i origin $AS' > "$whoisDir/whois_AS.txt" ${end}"
-	whois -h whois.radb.net -- "-i origin $AS" > "$whoisDir/whois_AS.txt"
+	for as_value in $AS; do
+    	whois -h whois.radb.net -- "-i origin $as_value" > "$whoisDir/whois_$as_value.txt"
+	done
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}whois -h whois.radb.net -- '-i origin $AS' | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u > "$whoisDir/whois_AS-IPs.txt" ${end}"
 	whois -h whois.radb.net -- "-i origin $AS" | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u > "$whoisDir/whois_AS-IPs.txt"
@@ -575,7 +646,6 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}gau --threads 2 $domain --o "$gauDir/gau.txt" 2>/dev/null ${end}\n"
 	gau --threads 2 $domain --o "$gauDir/gau.txt" 2>/dev/null
-
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}cat "$gauDir/gau.txt" | unfurl --unique domains > "$gauDir/gau_subdomains.txt" ${end}\n"
 	cat "$gauDir/gau.txt" | unfurl --unique domains > "$gauDir/gau_subdomains.txt"
@@ -631,7 +701,7 @@ runHunter(){
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Taking multiple screenshots of web pages with gowitness on the main domain scope ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/firefox-esr${end}\n"
-	gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/firefox-esr
+	gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/google-chrome-stable
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish gowitness...${end}\n"
 }
