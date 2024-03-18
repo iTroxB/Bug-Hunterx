@@ -578,6 +578,24 @@ runHunter(){
 	echo -e "\n ${yellow}→${end} ${gray}cat "$httpxDir/httpx_HTTP200.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP200-subdomains.txt" ${end}"
 	cat "$httpxDir/httpx_HTTP200.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP200-subdomains.txt"
 	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}httpx -l "$subDir/subfinder_subdomains.txt" -silent -status-code -mc 301 -probe -o "$httpxDir/httpx_HTTP301.txt" ${end}"
+	httpx -l "$subDir/subfinder_subdomains.txt" -status-code -mc 301 -probe -o "$httpxDir/httpx_HTTP301.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}cat "$httpxDir/httpx_HTTP301.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP301-subdomains.txt" ${end}"
+	cat "$httpxDir/httpx_HTTP301.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP301-subdomains.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}httpx -l "$subDir/subfinder_subdomains.txt" -silent -status-code -mc 302 -probe -o "$httpxDir/httpx_HTTP302.txt" ${end}"
+	httpx -l "$subDir/subfinder_subdomains.txt" -status-code -mc 302 -probe -o "$httpxDir/httpx_HTTP302.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}cat "$httpxDir/httpx_HTTP302.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP302-subdomains.txt" ${end}"
+	cat "$httpxDir/httpx_HTTP302.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP302-subdomains.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}httpx -l "$subDir/subfinder_subdomains.txt" -silent -status-code -mc 403 -probe -o "$httpxDir/httpx_HTTP403.txt" ${end}"
+	httpx -l "$subDir/subfinder_subdomains.txt" -status-code -mc 403 -probe -o "$httpxDir/httpx_HTTP403.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${yellow}→${end} ${gray}cat "$httpxDir/httpx_HTTP403.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP403-subdomains.txt" ${end}"
+	cat "$httpxDir/httpx_HTTP403.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$httpxDir/httpx_HTTP403-subdomains.txt"
+	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish httpx...${end}\n"
 
 	sleep 2; echo
@@ -664,12 +682,13 @@ runHunter(){
 	subdomDir="/root/$domain/subdomain"
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Obtaining unique and live subdomains from $domain scanning ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
-	cat "$ceroDir/cero.txt" "$ctfrDir/ctfr_subdomains.txt" "$dnsxDir/dnsx_subdomains.txt" "$gauDir/gau_subdomains.txt" "$httpxDir/httpx_HTTP200-subdomains.txt" "$katanaDir/katana_subdomains.txt" "$subDir/subfinder_subdomains.txt" > "$subdomDir/pre_scope.txt"
+	cat "$ceroDir/cero.txt" "$ctfrDir/ctfr_subdomains.txt" "$dnsxDir/dnsx_subdomains.txt" "$gauDir/gau_subdomains.txt" "$httpxDir/httpx_HTTP200-subdomains.txt" "$httpxDir/httpx_HTTP301-subdomains.txt" "$httpxDir/httpx_HTTP302-subdomains.txt" "$httpxDir/httpx_HTTP403-subdomains.txt" "$subDir/subfinder_subdomains.txt" > "$subdomDir/pre_scope.txt"
 	cat "$subdomDir/pre_scope.txt" | unfurl --unique domains > "$subdomDir/scope.txt"
-	httpx -l "$subdomDir/scope.txt" -silent -status-code -mc 200 -probe > "$subdomDir/scope_HTTP200.txt"
-	cat "$subdomDir/scope_HTTP200.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$subdomDir/scope_lives.txt"
-	cat "$subdomDir/scope_lives.txt" | tr '[:upper:]' '[:lower:]' | sed 's/\.[a-z]*$//' | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
-	rm -rf {"$subdomDir/pre_scope.txt","$subdomDir/scope.txt","$subdomDir/scope_HTTP200.txt","$subdomDir/scope_lives.txt"}
+	httpx -l "$subdomDir/scope.txt" -silent -status-code -mc 200,301,302,403 -probe > "$subdomDir/scope_HTTP.txt"
+	cat "$subdomDir/scope_HTTP.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$subdomDir/scope_lives.txt"
+	cat "$subdomDir/scope_lives.txt" | tr '[:upper:]' '[:lower:]' | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
+	# cat "$subdomDir/scope_lives.txt" | tr '[:upper:]' '[:lower:]' | sed 's/\.[a-z]*$//' | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
+	rm -rf {"$subdomDir/pre_scope.txt","$subdomDir/scope.txt","$subdomDir/scope_HTTP.txt","$subdomDir/scope_lives.txt"}
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${yellow}→${end} ${gray}Created subdomains_lives.txt file in $subdomDir directory${end}"
 	# ----------------------------------------------------------------------------------------------------
@@ -695,15 +714,10 @@ runHunter(){
 	katanaDir="/root/$domain/katana"
 	KTN=$(cat $subdomDir/subdomains_lives.txt);
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Performing crawling and spidering with katana over $domain ${end}\n"
-	# ----------------------------------------------------------------------------------------------------
-	for subline in $KTN; do
-    	katana -u "$subline" -o "$katanaDir/katana_$subline.txt"
-	done
  	# ----------------------------------------------------------------------------------------------------
 	for subline in $KTN; do
     	katana -u $subline -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_$subline.txt"
 	done
-	katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish katana...${end}\n"
 }
