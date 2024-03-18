@@ -606,24 +606,6 @@ runHunter(){
 
 	sleep 2; echo
 
-	# katana
-	mkdir -p "/root/$domain/katana"
-	katanaDir="/root/$domain/katana"
-	echo -e "\n ${turquoise}[➤]${end} ${gray}Performing crawling and spidering with katana over $domain ${end}\n"
-	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}katana -u $domain -o "$katanaDir/katana.txt" ${end}"
-	katana -u $domain -o "$katanaDir/katana.txt"
-	# ----------------------------------------------------------------------------------------------------
-	echo -e "\n ${yellow}→${end} ${gray}katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt" ${end}"
-	katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt"
-	# ----------------------------------------------------------------------------------------------------
-	echo -e "\n ${yellow}→${end} ${gray}cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_subdomains.txt" ${end}"
-	cat $katanaDir/katana.txt $katanaDir/katana_filtered.txt | unfurl --unique domains > "$katanaDir/katana_subdomains.txt"
-	# ----------------------------------------------------------------------------------------------------
-	echo -e "\n ${green}[✔]${end} ${gray}Finish katana...${end}\n"
-
-	sleep 2; echo
-
 	# ctfr
 	mkdir -p "/root/$domain/ctfr"
 	ctfrDir="/root/$domain/ctfr"
@@ -686,7 +668,7 @@ runHunter(){
 	cat "$subdomDir/pre_scope.txt" | unfurl --unique domains > "$subdomDir/scope.txt"
 	httpx -l "$subdomDir/scope.txt" -silent -status-code -mc 200 -probe > "$subdomDir/scope_HTTP200.txt"
 	cat "$subdomDir/scope_HTTP200.txt" | cut -d ' ' -f 1 | sed 's/^https:\/\///' > "$subdomDir/scope_lives.txt"
-	cat "$subdomDir/scope_lives.txt" | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
+	cat "$subdomDir/scope_lives.txt" | tr '[:upper:]' '[:lower:]' | sed 's/\.[a-z]*$//' | unfurl --unique domains > "$subdomDir/subdomains_lives.txt"
 	rm -rf {"$subdomDir/pre_scope.txt","$subdomDir/scope.txt","$subdomDir/scope_HTTP200.txt","$subdomDir/scope_lives.txt"}
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${yellow}→${end} ${gray}Created subdomains_lives.txt file in $subdomDir directory${end}"
@@ -702,8 +684,28 @@ runHunter(){
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/firefox-esr${end}\n"
 	gowitness file -f "$subdomDir/subdomains_lives.txt" -P "$gowitnessDir/screenshots/" --chrome-path /usr/bin/google-chrome-stable
+	rm -rf /root/gowitness.sqlite3
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish gowitness...${end}\n"
+
+	sleep 2; echo
+
+	# katana
+	mkdir -p "/root/$domain/katana"
+	katanaDir="/root/$domain/katana"
+	KTN=$(cat $subdomDir/subdomains_lives.txt);
+	echo -e "\n ${turquoise}[➤]${end} ${gray}Performing crawling and spidering with katana over $domain ${end}\n"
+	# ----------------------------------------------------------------------------------------------------
+	for subline in $KTN; do
+    	katana -u "$subline" -o "$katanaDir/katana_$subline.txt"
+	done
+ 	# ----------------------------------------------------------------------------------------------------
+	for subline in $KTN; do
+    	katana -u $subline -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_$subline.txt"
+	done
+	katana -u $domain -jc -kf robotstxt,sitemapxml,securitytxt -o "$katanaDir/katana_filtered.txt"
+	# ----------------------------------------------------------------------------------------------------
+	echo -e "\n ${green}[✔]${end} ${gray}Finish katana...${end}\n"
 }
 
 # Help menu
