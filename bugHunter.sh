@@ -279,7 +279,7 @@ upHunter(){
 				rm -rf $HOME/go/bin/httpx
 				go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 				ln -s $HOME/go/bin/httpx /usr/bin/httpx
-				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end} \n"
+				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end}"
 				sleep 1
 			else
 				echo -e "\n ${red}[✘]${end} ${blue}httpx${end} ${gray}is not installed on your system...${end}"
@@ -289,7 +289,7 @@ upHunter(){
 				rm -rf $HOME/go/bin/httpx
 				go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 				ln -s $HOME/go/bin/httpx /usr/bin/httpx
-				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end} \n"
+				echo -e "\n ${green}[✔]${end} ${blue}httpx${end} ${gray}has successfully installed on your system...${end}"
 				sleep 1
 			fi
 
@@ -454,7 +454,7 @@ upHunter(){
 
 			# subfinder
 			if [ "$(which subfinder)" == "/usr/bin/subfinder" ]; then
-				echo -e "\n ${green}[✔]${end} ${blue}subfinder${end} ${gray}installed...${end}"
+				echo -e "\n ${green}[✔]${end} ${blue}subfinder${end} ${gray}installed...${end} \n"
 				sleep 1
 			else
 				echo -e "\n ${red}[✘]${end} ${blue}subfinder${end} ${gray}is not installed on your system...${end}"
