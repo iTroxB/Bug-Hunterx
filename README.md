@@ -19,22 +19,32 @@ Tool that allows to install a specific application environment to perform Bug Bo
 
 ![bugHunter](./img/bughunter3.png)
 
-| **Tools used** | **Status** |
+| **Tools installed** | **Status** |
 |----------------|-----------|
+| golang-go | **✔** |
+| google-chrome | **✔** |
+| zip | **✔** |
+| unzip | **✔** |
+| nslookup | **✔** |
+| dig | **✔** |
 | whois | **✔** |
-| zaproxy | **✔** |      
+| zaproxy | **✔** |
+| burpsuite | **✔** |
 | mapcidr | **✔** |
 | dnsx | **✔** |
-| massdns | **✔** |
+| amass | **✔** |
 | cero | **✔** |
 | katana | **✔** |
 | httpx | **✔** |
 | unfurl | **✔** |
 | gau | **✔** |
 | ctfr | **✔** |
+| eog | **✔** |
 | gowitness | **✔** |
 | analyticsrelationships | **✔** |
 | gobuster | **✔** |
 | nuclei | **✔** |
 | nuclei-templates | **✔** |
-|SecLists | **✔** |
+| SecLists | **✔** |
+| nmap | **✔** |
+| Subfinder | **✔** |
