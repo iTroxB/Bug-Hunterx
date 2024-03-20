@@ -810,7 +810,7 @@ help_menu() {
 	echo -e "			 ${yellow}→${end} ${gray}SecLists${end}"
 	echo -e " 			 ${yellow}→${end} ${gray}nmap${end}"
 	echo -e " 			 ${yellow}→${end} ${gray}Subfinder${end} \n"
-    echo -e " 	${turquoise}2${end}, ${purple}runHunter${end}	${gray}Start with the footprinting and fingerprinting process${end}\n"
+    echo -e " 	${turquoise}2${end}, ${purple}runHunter${end}	${gray}Start with the footprinting process${end}\n"
 }
 
 # Menu options function
