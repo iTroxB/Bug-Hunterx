@@ -19,6 +19,10 @@ Tool that allows to install a specific application environment to perform Bug Bo
 
 ![bugHunter](./img/bughunter3.png)
 
+* Select option number 2:
+
+![bugHunter](./img/bughunter4.png)
+
 | **Tools installed** | **Status** |
 |----------------|-----------|
 | golang-go | **✔** |
