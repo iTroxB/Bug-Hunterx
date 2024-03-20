@@ -41,7 +41,7 @@ print_banner() {
 	echo -e " ${yellow}               __/ | ${end}"
 	echo -e " ${yellow}              |___/ ${end}\n\n"
 	echo -e "  ${turquoise}Footprinting tool for Bug Bounty${end}"
-	echo -e "  ${turquoise}Version 1.0${end}"
+	echo -e "  ${turquoise}Version 1.2${end}"
     echo -e "  ${turquoise}Made by iTrox${end}\n"
 	echo -e "  ${turquoise}bugHunter [-h] or [--help] to view help menu${end}\n"
 }
@@ -58,7 +58,7 @@ upHunter(){
 			dist_name=$(cat /etc/os-release | head -n 2 | tail -n 1 | awk '{print $1}' | cut -d '=' -f 2 | cut -c 2-)
 			echo -e "\n ${turquoise}[➤]${end} ${gray}Updating${end} ${blue}"$dist_name" $(uname)${end} ${gray}repositories...${end} \n"
 			apt update
-			echo -e "\n ${green}[✔]${end} ${gray}Updating${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
+			echo -e "\n ${green}[✔]${end} ${gray}Updating${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n" 	
 			sleep 1
 			echo -e "\n ${turquoise}[➤]${end} ${gray}Upgrading${end} ${blue}"$dist_name" $(uname)${end} ${gray}system...${end} \n"
 			apt upgrade -y
@@ -72,6 +72,8 @@ upHunter(){
 			updatedb &>/dev/null
 			echo -e "\n ${green}[✔]${end} ${gray}Updatedb${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
 			sleep 1
+
+
 
 			# Install BugBounty tools
 			
@@ -100,6 +102,32 @@ upHunter(){
 				dpkg -i /root/google-chrome-stable_current_amd64.deb
 				rm -rf /root/google-chrome-stable_current_amd64.deb
 				echo -e "\n ${green}[✔]${end} ${blue}google-chrome${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+			
+			# zip
+			if [ "$(which zip)" == "/usr/bin/zip" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}zip${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}zip${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}zip${end}${gray}...${end}"
+				apt install zip -y
+				echo -e "\n ${green}[✔]${end} ${blue}zip${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
+			# unzip
+			if [ "$(which unzip)" == "/usr/bin/unzip" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}unzip${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}unzip${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}unzip${end}${gray}...${end}"
+				apt install unzip -y
+				echo -e "\n ${green}[✔]${end} ${blue}unzip${end} ${gray}has successfully installed on your system...${end} \n"
 				sleep 1
 			fi
 
@@ -152,6 +180,19 @@ upHunter(){
 				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}zaproxy${end}${gray}...${end}"
 				apt install zaproxy -y
 				echo -e "\n ${green}[✔]${end} ${blue}zaproxy${end} ${gray}has successfully installed on your system...${end} \n"
+				sleep 1
+			fi
+
+			# burpsuite
+			if [ "$(which burpsuite)" == "/usr/bin/burpsuite" ]; then
+				echo -e "\n ${green}[✔]${end} ${blue}burpsuite${end} ${gray}installed...${end}"
+				sleep 1
+			else
+				echo -e "\n ${red}[✘]${end} ${blue}burpsuite${end} ${gray}is not installed on your system...${end}"
+				sleep 1
+				echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}burpsuite${end}${gray}...${end}"
+				apt install burpsuite -y
+				echo -e "\n ${green}[✔]${end} ${blue}burpsuite${end} ${gray}has successfully installed on your system...${end} \n"
 				sleep 1
 			fi
 
@@ -655,8 +696,8 @@ runHunter(){
 	sleep 2; echo
 
 	# amass
-	mkdir -p "/root/$domain/amass"
-	amassDir="/root/$domain/amass"
+	#mkdir -p "/root/$domain/amass"
+	#amassDir="/root/$domain/amass"
 	echo -e "\n ${turquoise}[➤]${end} ${gray}amass: In development $domain ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
 	#echo -e "\n ${turquoise}[➤]${end} ${gray}Scanning with amass over $domain ${end}\n"
@@ -720,7 +761,30 @@ runHunter(){
 	done
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish katana...${end}\n"
+
+	sleep 2; echo
+
+	# Compress
+	echo -e "\n ${turquoise}[➤]${end} ${gray}Compressing${end} ${blue}$domain${end} ${gray}directory...${end}\n" 
+	compress_zip() {
+		zip /root/$domain.zip /root/$domain
+		if [ $? -eq 0 ]; then
+			echo -e "\n ${green}[✔]${end} ${gray}Compression successful...${end} \n"
+		else
+			echo -e "\n ${red}[✘]${end} ${gray}Trying to compress again...${end} \n"
+		fi
+	}
+
+	# Bucle while for compress_zip
+	while true; do
+		rm -rf /root/$domain.zip
+		compress_zip
+		sleep 1 
+	done
+
 }
+
+
 
 # Help menu
 help_menu() {
