@@ -15,7 +15,7 @@ Tool that allows to install a specific application environment to perform Bug Bo
 
 ## Use
 
-![bugHunter](./img/bughunter2.png)
+![bugHunter](./img/bughunter2.p)
 
 ![bugHunter](./img/bughunter3.png)
 
