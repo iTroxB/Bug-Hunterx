@@ -3,7 +3,7 @@
 **In development**
 
 
-![bugHunter](./img/bughunter1.png)
+![bugHunter](./img/bugHunterx-1.png)
 
 
 Tool that allows to install a specific application environment to perform Bug Bounty, in Debian and ArchLinux distributions (under development), as well as to perform footprinting and fingerprinting against a specific domain.
