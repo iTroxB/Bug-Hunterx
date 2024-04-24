@@ -66,7 +66,7 @@ upHunter(){
 			# pacman -Su --noconfirm
 			# echo -e "\n ${green}[✔]${end} ${gray}Upgrading${end} ${blue}"$dist_name" $(uname)${end} ${gray}ok...${end} \n"
 			#sleep 1
-			echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}"$dist_name" $(uname)${end} ${gray}repositories...${end} \n"
+			echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}"$dist_name"${end} ${gray}repositories...${end} \n"
 			echo -e "\n ${green}[✔]${end} ${gray}Directory${end} ${blue}blackarch_repos${end} ${gray}created in path $HOME...${end} \n"
 			mkdir $HOME/blackarch_repos
 			echo -e "\n ${green}[✔]${end} ${gray}Downloading${end} ${blue}strap.sh${end} ${gray} from blackarch.org...${end} \n"
