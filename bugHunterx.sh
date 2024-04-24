@@ -1208,22 +1208,22 @@ runHunter(){
 	sleep 2; echo
 
 	# Compress
-	echo -e "\n ${turquoise}[➤]${end} ${gray}Compressing${end} ${blue}$domain${end} ${gray}directory...${end}\n" 
-	compress_zip() {
-		zip /root/$domain.zip /root/$domain
-		if [ $? -eq 0 ]; then
-			echo -e "\n ${green}[✔]${end} ${gray}Compression successful...${end} \n"
-		else
-			echo -e "\n ${red}[✘]${end} ${gray}Trying to compress again...${end} \n"
-		fi
-	}
+	#echo -e "\n ${turquoise}[➤]${end} ${gray}Compressing${end} ${blue}$domain${end} ${gray}directory...${end}\n" 
+	#compress_zip() {
+	#	zip /root/$domain.zip /root/$domain
+	#	if [ $? -eq 0 ]; then
+	#		echo -e "\n ${green}[✔]${end} ${gray}Compression successful...${end} \n"
+	#	else
+	#		echo -e "\n ${red}[✘]${end} ${gray}Trying to compress again...${end} \n"
+	#	fi
+	#}
 
 	# Bucle while for compress_zip
-	while true; do
-		rm -rf /root/$domain.zip
-		compress_zip
-		sleep 1 
-	done
+	#while true; do
+	#	rm -rf /root/$domain.zip
+	#	compress_zip
+	#	sleep 1 
+	#done
 
 }
 
