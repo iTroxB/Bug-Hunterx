@@ -9,11 +9,15 @@ CLI tool that allows to install a specific application environment to perform fo
 
 The tool works on Debian (testing and working OK) and Arch Linux distributions (in testing, with possible bugs while a stable version is being implemented).
 
+To show how it works, images of both distributions are shown.
+
 * To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
 ```shell
 sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
+
+---
 
 ## Use
 
