@@ -11,6 +11,10 @@ The tool works on Debian (testing and working OK) and Arch Linux distributions (
 
 To show how it works, images of both distributions are shown.
 
+---
+
+## Symbolic Link
+
 * To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
 ```shell
