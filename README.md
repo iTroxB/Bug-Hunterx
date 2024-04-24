@@ -39,6 +39,14 @@ bugHunterx --help
 ![bugHunter](./img/bugHunterx-2.png)
 ![bugHunter](./img/bugHunterx-6.png)
 
+## Options
+
+#### Number 1
+
+* If you select number 1 bugHunterx will scan the type of distribution you are in, update the system and install a set of tools to prepare the Bug Bounty environment.
+
+####
+
 ## Tools installed
 
 | **Tools installed** | **Status** |
