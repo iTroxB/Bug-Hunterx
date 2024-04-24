@@ -1210,7 +1210,7 @@ runHunter(){
 	# Compress
 	#echo -e "\n ${turquoise}[➤]${end} ${gray}Compressing${end} ${blue}$domain${end} ${gray}directory...${end}\n" 
 	#compress_zip() {
-	#	zip /root/$domain.zip /root/$domain
+	#	zip -r /root/$domain.zip /root/$domain
 	#	if [ $? -eq 0 ]; then
 	#		echo -e "\n ${green}[✔]${end} ${gray}Compression successful...${end} \n"
 	#	else
