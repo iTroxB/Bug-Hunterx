@@ -54,7 +54,17 @@ bugHunterx --help
 
 * If you select number 1 bugHunterx will scan the type of distribution you are in, update the system and install a set of tools to prepare the Bug Bounty environment.
 
-####
+![bugHunter](./img/bugHunterx-4.png)
+
+---
+
+### Number 2
+
+* If you select number 2 bugHunterx will ask you to enter a domain name. After that it will start scanning it, applying a series of tools with payloads specifically created to obtain as much useful information as possible prior to detecting web vulnerabilities.
+
+![bugHunter](./img/bugHunterx-9.png)
+
+---
 
 ## Tools installed
 
