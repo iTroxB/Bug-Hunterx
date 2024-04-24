@@ -1089,7 +1089,7 @@ runHunter(){
 	analyticsDir="/root/$domain/analyticsRelationships"
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Querying Google Analytics IDs for domains and/or subdomains with analyticsrelationships over $domain ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
-	echo -e " ${yellow}→${end} ${gray}httpx -l "$subDir/subfinder.txt" -silent -o "$httpxDir/httpx_allsubdomains.txt" ${end}"
+	echo -e " ${yellow}→${end} ${gray}analyticsrelationships --url https://$domain > "$analyticsDir/analyticsRelationships.txt" ${end}"
 	analyticsrelationships --url https://$domain > "$analyticsDir/analyticsRelationships.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${green}[✔]${end} ${gray}Finish analyticsrelationships...${end}\n"
