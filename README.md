@@ -29,10 +29,10 @@ bugHunterx --help
 
 * View from Arch Linux distribution (myArch)
 
-![bugHunter](./img/bugHunterx-2.png)
+![bugHunter](./img/bugHunterx-3.png)
 
 * View from Debian distribution (Parrot Sec)
-![bugHunter](./img/bugHunterx-6.png)
+![bugHunter](./img/bugHunterx-7.png)
 
 * Select option number 2:
 
