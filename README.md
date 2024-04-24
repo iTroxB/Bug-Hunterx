@@ -1,20 +1,29 @@
-# **BugHunter Scan**
+# **BugHunterx**
 
 **In development**
-
 
 ![bugHunter](./img/bugHunterx-1.png)
 
 
-Tool that allows to install a specific application environment to perform Bug Bounty, in Debian and ArchLinux distributions (under development), as well as to perform footprinting and fingerprinting against a specific domain.
+CLI tool that allows to install a specific application environment to perform footprinting in BugBounty exercises against a specific initial domain.
 
-* To use the tool at the system level from a relative path, it is recommended to create a symbolic link to the /usr/bin directory.
+The tool works on Debian (testing and working OK) and Arch Linux distributions (in testing, with possible bugs while a stable version is being implemented).
 
-    + sudo ln -s /path/to/my/file/bugHunter.sh /usr/bin/bugHunter
+* To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
+```shell
+sudo ln -s /path/to/file/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
+```
 
 ## Use
 
+* To know the options and parameters of the tool run the help menu with the flag `-h` or `--help`.
+
+```shell
+bugHunterx -h
+
+bugHunterx --help
+```
 ![bugHunter](./img/bughunter2.png)
 
 ![bugHunter](./img/bughunter3.png)
@@ -54,4 +63,4 @@ Tool that allows to install a specific application environment to perform Bug Bo
 | nuclei-templates | **✔** |
 | SecLists | **✔** |
 | nmap | **✔** |
-| Subfinder | **✔** |
+| subfinder | **✔** |
