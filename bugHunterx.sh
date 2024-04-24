@@ -69,7 +69,7 @@ upHunter(){
 			echo -e "\n ${turquoise}[➤]${end} ${gray}Installing${end} ${blue}"$dist_name"${end} ${gray}repositories...${end} \n"
 			echo -e "\n ${green}[✔]${end} ${gray}Directory${end} ${blue}blackarch_repos${end} ${gray}created in path $HOME...${end} \n"
 			mkdir $HOME/blackarch_repos
-			echo -e "\n ${green}[✔]${end} ${gray}Downloading${end} ${blue}strap.sh${end} ${gray} from blackarch.org...${end} \n"
+			echo -e "\n ${green}[✔]${end} ${gray}Downloading${end} ${blue}strap.sh${end} ${gray}from blackarch.org...${end} \n"
 			curl -o $HOME/blackarch_repos/strap.sh https://blackarch.org/strap.sh
 			echo -e "\n ${turquoise}[➤]${end} ${gray}Installing repositories...${end} \n"
 			chmod +x $HOME/blackarch_repos/strap.sh
