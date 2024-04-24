@@ -26,9 +26,13 @@ bugHunterx -h
 ```shell
 bugHunterx --help
 ```
-![bugHunter](./img/bughunter2.png)
 
-![bugHunter](./img/bughunter3.png)
+* View from Arch Linux distribution (myArch)
+
+![bugHunter](./img/bugHunterx-2.png)
+
+* View from Debian distribution (Parrot Sec)
+![bugHunter](./img/bugHunterx-6.png)
 
 * Select option number 2:
 
