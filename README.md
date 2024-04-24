@@ -12,7 +12,7 @@ The tool works on Debian (testing and working OK) and Arch Linux distributions (
 * To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
 ```shell
-sudo ln -s /path/to/file/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
+sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
 
 ## Use
@@ -21,7 +21,9 @@ sudo ln -s /path/to/file/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 
 ```shell
 bugHunterx -h
+```
 
+```shell
 bugHunterx --help
 ```
 ![bugHunter](./img/bughunter2.png)
