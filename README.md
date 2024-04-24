@@ -52,7 +52,7 @@ bugHunterx --help
 
 ### Number 1
 
-* If you select number 1 bugHunterx will scan the type of distribution you are in, update the system and install a set of tools to prepare the Bug Bounty environment.
+* If you select number 1 bugHunterx will get the current distribution type, update repositories and system and install a set of tools to prepare the Bug Bounty environment.
 
 ![bugHunter](./img/bugHunterx-4.png)
 
@@ -71,6 +71,7 @@ bugHunterx --help
 | **Tools installed** | **Status** |
 |----------------|-----------|
 | golang-go | **✔** |
+| python3 | **✔** |
 | google-chrome | **✔** |
 | zip | **✔** |
 | unzip | **✔** |
