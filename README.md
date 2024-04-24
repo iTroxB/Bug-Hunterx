@@ -34,10 +34,10 @@ bugHunterx --help
 * View from Debian distribution (Parrot Sec)
 ![bugHunter](./img/bugHunterx-7.png)
 
-* Select option number 2:
+* **Note:** The tool only works as root user.
 
-![bugHunter](./img/bughunter4.png)
-
+![bugHunter](./img/bugHunterx-2.png)
+![bugHunter](./img/bugHunterx-6.png)
 
 ## Tools installed
 
