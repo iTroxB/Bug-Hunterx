@@ -20,7 +20,7 @@ To show how it works, images of both distributions are shown.
 ```shell
 sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
-<br>
+
 ---
 
 ## Use
@@ -45,11 +45,12 @@ bugHunterx --help
 * **Note:** The tool only works as root user.
 
 ![bugHunter](./img/bugHunterx-2.png)
-![bugHunter](./img/bugHunterx-6.png)
+
+---
 
 ## Options
 
-#### Number 1
+### Number 1
 
 * If you select number 1 bugHunterx will scan the type of distribution you are in, update the system and install a set of tools to prepare the Bug Bounty environment.
 
