@@ -21,7 +21,9 @@ To show how it works, images of both distributions are shown.
 sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
 
+</br>
 ---
+</br>
 
 ## Use
 
