@@ -20,11 +20,9 @@ To show how it works, images of both distributions are shown.
 ```shell
 sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
-
 </br>
 ---
 </br>
-
 ## Use
 
 * To know the options and parameters of the tool run the help menu with the flag `-h` or `--help`.
