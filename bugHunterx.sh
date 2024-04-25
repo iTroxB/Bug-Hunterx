@@ -1114,7 +1114,7 @@ runHunter(){
 	echo -e "\n ${turquoise}[➤]${end} ${gray}Searching certificate transparency logs for subdomains with ctfr over $domain ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}ctfr -org -d $domain -o "$ctfrDir/ctfr.txt" ${end}"
-	ctfr -org -d $domain -o "$ctfrDir/ctfr.txt"
+	ctfr -d $domain -o "$ctfrDir/ctfr.txt"
 	# ----------------------------------------------------------------------------------------------------
 	echo -e "\n ${yellow}→${end} ${gray}ctfr -org -d $domain | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt" ${end}"
 	cat "$ctfrDir/ctfr.txt" | unfurl --unique domains > "$ctfrDir/ctfr_subdomains.txt"
@@ -1141,7 +1141,7 @@ runHunter(){
 	# amass
 	#mkdir -p "/root/$domain/amass"
 	#amassDir="/root/$domain/amass"
-	echo -e "\n ${turquoise}[➤]${end} ${gray}amass: In development $domain ${end}\n"
+	echo -e "\n ${turquoise}[➤]${end} ${gray}amass: In development${end}\n"
 	# ----------------------------------------------------------------------------------------------------
 	#echo -e "\n ${turquoise}[➤]${end} ${gray}Scanning with amass over $domain ${end}\n"
 	# ----------------------------------------------------------------------------------------------------
