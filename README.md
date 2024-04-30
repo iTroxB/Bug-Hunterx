@@ -18,6 +18,7 @@ To show how it works, images of both distributions are shown.
 * To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
 ```shell
+chmod +x bugHunterx
 sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
 
