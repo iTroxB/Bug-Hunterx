@@ -1,7 +1,5 @@
 #!/bin/bash
 # Author: iTrox
-# https://patorjk.com/software/taag/#p=display&f=Slant&t=Bug%20Hunterx
-
 
 
 ######################################################
