@@ -41,7 +41,7 @@ print_banner() {
 	echo -e " ${yellow}            /____/ ${end}\n\n"
 	echo -e "  ${turquoise}Footprinting tool for Bug Bounty${end}"
 	echo -e "  ${turquoise}Version 2.0${end}"
-    echo -e "  ${turquoise}Made by iTrox${end}\n"
+    echo -e "  ${blue}Made by iTrox${end}\n"
 	echo -e "  ${turquoise}bugHunter [-h] or [--help] to view help menu${end}\n"
 }
 
