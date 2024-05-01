@@ -71,8 +71,8 @@ bugHunterx --help
 
 For Parrot Sec or any Parrot OS distribution, make the following changes to the source code of bugHunterx.sh
 
-- The content of line 494 `apt upgrade -y` replace it with `parrot-upgrade`.
-- Comment on lines 497, 498, 499 and 500.
+- The content of line 492 `apt upgrade -y` replace it with `parrot-upgrade`.
+- Comment on lines 495, 496, 497 and 498.
 
 ## Tools installed
 
