@@ -1000,7 +1000,7 @@ runHunter(){
 	AS=$(whois -h whois.radb.net $ip_address | grep -w 'origin:' | awk '{print $2}' | uniq)
 	echo -e " ${yellow}→${end} ${gray}whois -h whois.radb.net -- '-i origin $AS' > "$whoisDir/whois_AS.txt" ${end}"
 	for as_value in $AS; do
-    	whois -h whois.radb.net -- "-i origin $as_value" > "$whoisDir/whois_$as_value.txt"
+    		whois -h whois.radb.net -- "-i origin $as_value" > "$whoisDir/whois_$as_value.txt"
 	done
 	# ----------------------------------------------------------------------------------------------------
 	echo -e " ${yellow}→${end} ${gray}whois -h whois.radb.net -- '-i origin $AS' | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u > "$whoisDir/whois_AS-IPs.txt" ${end}"
