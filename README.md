@@ -19,7 +19,7 @@ To show how it works, images of both distributions are shown.
 
 ```shell
 chmod +x bugHunterx.sh
-sudo ln -s /path/to/repository/bugHunterx/bugHunterx.sh /usr/bin/bugHunterx
+sudo ln -s /path/to/repository/bug-Hunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
 
 ---
