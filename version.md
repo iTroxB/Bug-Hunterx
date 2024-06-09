@@ -1,4 +1,4 @@
-# Versions bugHunterx.sh
+# Versions Bug Hunterx
 
 | Number version | Details |
 |---------|----------|
