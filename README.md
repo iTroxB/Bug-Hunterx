@@ -1,9 +1,8 @@
 # **BugHunterx**
 
-**In development**
-
-![bugHunter](./img/bugHunterx-1.png)
-
+<div align="center">
+  <img src="/img/bugHunterx-1.png" width=750px>
+</div>
 
 CLI tool that allows to install a specific application environment to perform footprinting in BugBounty exercises against a specific initial domain.
 
@@ -13,18 +12,20 @@ To show how it works, images of both distributions are shown.
 
 ---
 
-## Symbolic Link
+## Install tool
+
+* Download the repository to your system
+
+```shell
+sudo git -C /opt clone https://github.com/iTroxB/Bug-Hunterx.git
+```
 
 * To use the system-level tool as an executable from a relative path, it is recommended to create a symbolic link to the /usr/bin directory from your repository directory.
 
 ```shell
-chmod +x bugHunterx.sh
-sudo ln -s /path/to/repository/bug-Hunterx/bugHunterx.sh /usr/bin/bugHunterx
+sudo chmod +x /opt/Bug-Hunterx/bugHunterx.sh
+sudo ln -s /opt/Bug-Hunterx/bugHunterx.sh /usr/bin/bugHunterx
 ```
-
----
-
-## Use
 
 * To know the options and parameters of the tool run the help menu with the flag `-h` or `--help`.
 
@@ -35,6 +36,14 @@ bugHunterx -h
 ```shell
 bugHunterx --help
 ```
+
+<div align="center">
+  <img src="/img/jwt-help.png" width=750px>
+</div>
+
+---
+
+## Use tool
 
 * View from Arch Linux distribution (myArch)
 
