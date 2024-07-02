@@ -38,19 +38,12 @@ bugHunterx --help
 ```
 
 <div align="center">
-  <img src="/img/jwt-help.png" width=750px>
+  <img src="/img/bugHunterx-3.png" width=750px>
 </div>
 
 ---
 
 ## Use tool
-
-* View from Arch Linux distribution (myArch)
-
-![bugHunter](./img/bugHunterx-3.png)
-
-* View from Debian distribution (Parrot Sec)
-![bugHunter](./img/bugHunterx-7.png)
 
 * **Note:** The tool only works as root user.
 
